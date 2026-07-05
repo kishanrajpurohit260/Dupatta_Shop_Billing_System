@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Product</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h2 class="text-center mb-4">Edit Product</h2>
+
+<form action="/update_product" method="POST">
+
+<input type="hidden" name="id" value="{{product[0]}}">
+
+<div class="mb-3">
+<label>Product Name</label>
+<input type="text" name="name" value="{{product[1]}}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Design</label>
+<input type="text" name="design" value="{{product[2]}}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Price</label>
+<input type="number" name="price" value="{{product[3]}}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Stock</label>
+<input type="number" name="stock" value="{{product[4]}}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>HSN Code</label>
+<input type="text" name="hsn_code" value="{{product[6]}}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>GST (%)</label>
+<input type="number" name="gst" value="{{product[7]}}" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Unit</label>
+
+<select name="unit" class="form-control">
+
+<option value="PCS" {% if product[8]=='PCS' %}selected{% endif %}>PCS</option>
+
+<option value="Meter" {% if product[8]=='Meter' %}selected{% endif %}>Meter</option>
+
+<option value="Pair" {% if product[8]=='Pair' %}selected{% endif %}>Pair</option>
+
+</select>
+
+</div>
+
+<button class="btn btn-success">
+Update Product
+</button>
+
+<a href="/products" class="btn btn-secondary">
+Back
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

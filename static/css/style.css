@@ -1,0 +1,176 @@
+/* ===========================
+   General
+=========================== */
+
+body{
+    background-color:#f5f7fa;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar{
+    padding:15px;
+    box-shadow:0px 3px 10px rgba(0,0,0,0.2);
+}
+
+
+/* ===========================
+   Sidebar
+=========================== */
+
+.bg-light{
+    background:#ffffff !important;
+    border-right:1px solid #ddd;
+}
+
+
+/* ===========================
+   Dashboard Cards
+=========================== */
+
+.card{
+
+    border:none;
+    border-radius:15px;
+    box-shadow:0px 4px 12px rgba(0,0,0,0.15);
+    transition:0.3s;
+    margin-bottom:20px;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card h5{
+
+    color:#666;
+
+}
+
+.card h2{
+
+    font-size:35px;
+    font-weight:bold;
+
+}
+
+
+/* ===========================
+   Buttons
+=========================== */
+
+.btn{
+
+    border-radius:10px;
+
+}
+
+
+/* ===========================
+   Tables
+=========================== */
+
+table{
+
+    background:white;
+
+}
+
+th{
+
+    background:#212529;
+    color:white;
+
+}
+
+th,
+td{
+
+    text-align:center;
+    vertical-align:middle;
+
+}
+
+
+/* ===========================
+   Forms
+=========================== */
+
+input,
+select{
+
+    border-radius:8px !important;
+
+}
+
+
+/* ===========================
+   Headings
+=========================== */
+
+h1,h2,h3,h4,h5{
+
+    font-weight:bold;
+
+}
+
+
+/* ===========================
+   Links
+=========================== */
+
+a{
+
+    text-decoration:none;
+
+}
+@page{
+    size:A4;
+    margin:10mm;
+}
+
+.container{
+    max-width:100%;
+}
+
+.table td,
+.table th{
+    font-size:13px;
+    padding:5px;
+}
+
+@page{
+    size:A4;
+    margin:8mm;
+}
+
+body{
+    margin:0;
+}
+
+table{
+    page-break-inside:avoid;
+}
+
+tr{
+    page-break-inside:avoid;
+}
+
+button{
+    margin-top:20px;
+}
+
+@media print{
+
+button{
+display:none;
+}
+
+}

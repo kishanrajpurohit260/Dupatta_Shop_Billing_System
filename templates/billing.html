@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Create Bill</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+<form action="/create_bill" method="POST" id="billForm">
+
+<h2 class="text-center">Create GST Invoice</h2>
+
+<hr>
+
+<h4>Customer Details</h4>
+
+<div class="row">
+
+<div class="col-md-4">
+<label>Customer Name</label>
+<input type="text" name="customer" class="form-control" required>
+</div>
+
+<div class="col-md-4">
+<label>Mobile</label>
+<input type="text" name="mobile" class="form-control" required>
+</div>
+
+<div class="col-md-4">
+<label>Customer GSTIN</label>
+<input type="text" name="customer_gstin" class="form-control">
+</div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+<div class="col-md-8">
+<label>Customer Address</label>
+<textarea name="customer_address" class="form-control" rows="2"></textarea>
+</div>
+
+<div class="col-md-4">
+<label>State</label>
+<input type="text" name="state" value="Gujarat" class="form-control">
+</div>
+
+</div>
+
+<hr>
+
+<h4>Add Products</h4>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<label>Product</label>
+
+<select id="product" class="form-control">
+
+{% for p in products %}
+
+<option value="{{p[0]}}">
+
+    {{p[1]}} - {{p[2]}}
+    
+    </option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-2">
+
+<label>Quantity</label>
+
+<input type="number" id="qty" class="form-control">
+
+</div>
+
+<div class="col-md-2">
+
+<label>Rate</label>
+
+<input type="number" id="price" class="form-control">
+
+</div>
+
+<div class="col-md-2 d-grid">
+
+<label>&nbsp;</label>
+
+<button type="button" class="btn btn-primary" onclick="addProduct()">
+
+Add
+
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+<h4>Products List</h4>
+
+<table class="table table-bordered table-striped" id="billTable">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Product</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+<h3 class="text-end">
+
+Grand Total :
+₹ <span id="grandTotal">0</span>
+
+</h3>
+
+<input type="hidden" name="bill_data" id="bill_data">
+
+<div class="text-end">
+
+<button
+type="submit"
+class="btn btn-success"
+onclick="prepareBill()">
+
+Generate Invoice
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+let grandTotal = 0;
+
+let items = [];
+
+function addProduct(){
+
+let product=document.getElementById("product");
+
+let name=product.options[product.selectedIndex].text;
+
+let qty=parseInt(document.getElementById("qty").value);
+
+let price=parseFloat(document.getElementById("price").value);
+
+if(isNaN(qty)||isNaN(price)){
+
+alert("Enter Quantity and Price");
+
+return;
+
+}
+
+let total=qty*price;
+
+items.push({
+
+product_id:product.value,
+
+qty:qty,
+
+price:price
+
+});
+
+grandTotal+=total;
+
+document.getElementById("grandTotal").innerHTML=grandTotal;
+
+let row=document.createElement("tr");
+
+row.innerHTML=
+
+"<td>"+name+"</td>"+
+
+"<td>"+qty+"</td>"+
+
+"<td>"+price+"</td>"+
+
+"<td>"+total.toFixed(2)+"</td>";
+
+document.querySelector("#billTable tbody").appendChild(row);
+
+document.getElementById("qty").value="";
+
+document.getElementById("price").value="";
+
+}
+
+function prepareBill(){
+
+document.getElementById("bill_data").value=JSON.stringify(items);
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container mt-4">
+    
+    <h2 class="text-center mb-4">Add Dupatta Product</h2>
+    
+    <div class="card p-4 shadow">
+    
+    <form action="/add_product" method="POST">
+    
+    <div class="row">
+    
+    <div class="col-md-6 mb-3">
+    <label>Name</label>
+    <input type="text" name="name" class="form-control" required>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+    <label>Design</label>
+    <input type="text" name="design" class="form-control" required>
+    </div>
+    
+    
+    
+    <div class="col-md-3 mb-3">
+    <label>Price</label>
+    <input type="number" name="price" class="form-control" required>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+    <label>Stock</label>
+    <input type="number" name="stock" class="form-control" required>
+    </div>
+    
+    <br><br>
+
+    HSN Code:
+    <input
+    type="text"
+    name="hsn_code"
+    class="form-control">
+
+    <br><br>
+
+    GST (%):
+    <input
+    type="number"
+    name="gst"
+    value="5"
+    class="form-control">
+
+    <br><br>
+
+    Unit:
+    <select
+    name="unit"
+    class="form-control">
+
+    <option value="PCS">PCS</option>
+
+    <option value="Meter">Meter</option>
+
+    <option value="Pair">Pair</option>
+
+    </select>
+
+    <br><br>
+    </div>
+    
+    <button class="btn btn-primary">
+    Add Product
+    </button>
+    
+    </form>
+    
+    </div>
+    
+    <hr class="my-5">
+    
+    <h2>Products</h2>
+
+    <a href="/stock_history" class="btn btn-info mb-3">
+        Stock History
+    </a>
+    
+    <form method="GET" action="/products" class="row mb-3">
+    
+    <div class="col-md-4">
+    
+    <input
+    type="text"
+    name="search"
+    placeholder="Search Product"
+    class="form-control">
+    
+    </div>
+    
+    <div class="col-md-2">
+    
+    <button class="btn btn-success w-100">
+    Search
+    </button>
+    
+    </div>
+    
+    </form>
+    
+    <div class="table-responsive">
+    
+    <table class="table table-striped table-bordered table-hover">
+    
+    <thead class="table-dark">
+    
+    <tr>
+    
+    <th>ID</th>
+    <th>Name</th>
+    <th>Design</th>
+    <th>Price</th>
+    <th>Stock</th>
+    
+    <th>HSN</th>
+    <th>GST</th>
+    <th>Unit</th>
+    <th>Action</th>
+    
+    </tr>
+    
+    </thead>
+    
+    <tbody>
+    
+    {% for p in products %}
+    
+    <tr>
+    
+    <td>{{p[0]}}</td>
+    <td>{{p[1]}}</td>
+    <td>{{p[2]}}</td>
+    <td>₹{{p[3]}}</td>
+    <td>{{p[4]}}</td>
+    <td>{{p[6]}}</td>
+    <td>{{p[7]}}%</td>
+    <td>{{p[8]}}</td>
+    
+    <td>
+
+        <a href="/edit_product/{{p[0]}}" class="btn btn-warning btn-sm">
+        Edit
+        </a>
+        
+        <a href="/add_stock/{{p[0]}}" class="btn btn-success btn-sm">
+        Add Stock
+        </a>
+        
+        <a href="/delete_product/{{p[0]}}" class="btn btn-danger btn-sm">
+        Delete
+        </a>
+        
+        </td>
+    
+    </tr>
+    
+    {% endfor %}
+    
+    </tbody>
+    
+    </table>
+    
+    </div>
+    
+    </div>
+    
+    </body>
+
+</html>

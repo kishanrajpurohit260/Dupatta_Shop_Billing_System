@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Company Settings</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+<h2>Company Settings</h2>
+
+<hr>
+
+<form action="/update_settings" method="POST">
+
+<label>Shop Name</label>
+
+<input
+type="text"
+name="shop_name"
+class="form-control"
+value="{{setting[1]}}">
+
+<br>
+
+<label>Owner Name</label>
+
+<input
+type="text"
+name="owner_name"
+class="form-control"
+value="{{setting[2]}}">
+
+<br>
+
+<label>Mobile</label>
+
+<input
+type="text"
+name="mobile"
+class="form-control"
+value="{{setting[3]}}">
+
+<br>
+
+<label>Email</label>
+
+<input
+type="email"
+name="email"
+class="form-control"
+value="{{setting[4]}}">
+
+<br>
+
+<label>Address</label>
+
+<textarea
+name="address"
+class="form-control">{{setting[5]}}</textarea>
+
+<br>
+
+<label>GSTIN</label>
+
+<input
+type="text"
+name="gstin"
+class="form-control"
+value="{{setting[6]}}">
+
+<br>
+
+<label>Bank Name</label>
+
+<input
+type="text"
+name="bank_name"
+class="form-control"
+value="{{setting[7]}}">
+
+<br>
+
+<label>Account Number</label>
+
+<input
+type="text"
+name="account_no"
+class="form-control"
+value="{{setting[8]}}">
+
+<br>
+
+<label>IFSC Code</label>
+
+<input
+type="text"
+name="ifsc"
+class="form-control"
+value="{{setting[9]}}">
+
+<br>
+
+<button class="btn btn-success">
+
+Save Settings
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>
