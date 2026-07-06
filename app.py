@@ -1,9 +1,11 @@
 from reportlab.pdfgen import canvas
 from flask import send_file
 import os
+from io import BytesIO
 from flask import Flask, render_template, request, redirect, session
 import json
 from database import connect_db
+
 
 
 app = Flask(__name__)
@@ -554,38 +556,25 @@ def pdf(id):
 
     bill = cursor.fetchone()
 
+    buffer = BytesIO()
 
-    filename = f"bills/bill_{id}.pdf"
+    pdf = canvas.Canvas(buffer)
 
-
-    pdf = canvas.Canvas(filename)
-
-
-    pdf.drawString(
-        100,750,
-        "Dupatta Shop Billing System"
-    )
-
-    pdf.drawString(
-        100,700,
-        f"Customer: {bill[1]}"
-    )
-
-    pdf.drawString(
-        100,650,
-        f"Mobile: {bill[2]}"
-    )
-
-    pdf.drawString(
-        100,600,
-        f"Total: {bill[3]}"
-    )
-
+    pdf.drawString(100, 750, "Dupatta Shop Billing System")
+    pdf.drawString(100, 700, f"Customer: {bill[1]}")
+    pdf.drawString(100, 650, f"Mobile: {bill[2]}")
+    pdf.drawString(100, 600, f"Total: {bill[3]}")
 
     pdf.save()
 
+    buffer.seek(0)
 
-    return send_file(filename)
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name=f"bill_{id}.pdf",
+        mimetype="application/pdf"
+    )
 
 @app.route("/stock_history")
 def stock_history():
